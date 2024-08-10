@@ -1,330 +1,68 @@
 <?php
 
-namespace UniPayment\Client\Model;
-
-use \ArrayAccess;
-use \UniPayment\Client\ObjectSerializer;
+namespace UniPayment\SDK\Model;
 
 /**
- * ExchangeRate Class Doc Comment
+ * Exchange Rate
  *
  * @category Class
- * @package  UniPayment\Client
+ * @package  UniPayment\SDK\Model
  */
-class ExchangeRate implements ModelInterface, ArrayAccess
+class ExchangeRate
 {
-    const DISCRIMINATOR = null;
+    private string $from;
+    private string $to;
+    private float $rate;
+    private float $ask;
+    private float $bid;
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    protected static $modelName = 'ExchangeRate';
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
-    protected static $fieldTypes = [
-        'from' => 'string',
-        'to' => 'string',
-        'rate' => 'double'];
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
-    protected static $fieldFormats = [
-        'from' => null,
-        'to' => null,
-        'rate' => 'double'];
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function fieldTypes(): array
-    {
-        return self::$fieldTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function fieldFormats(): array
-    {
-        return self::$fieldFormats;
-    }
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [
-        'from' => 'from',
-        'to' => 'to',
-        'rate' => 'rate'];
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-        'from' => 'setFrom',
-        'to' => 'setTo',
-        'rate' => 'setRate'];
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-        'from' => 'getFrom',
-        'to' => 'getTo',
-        'rate' => 'getRate'];
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap(): array
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters(): array
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters(): array
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName(): string
-    {
-        return self::$modelName;
-    }
-
-    /**
-     * Associative array for storing property values
-     *
-     * @var array
-     */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param array|null $data Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
-    {
-        $this->container['from'] = $data['from'] ?? null;
-        $this->container['to'] = $data['to'] ?? null;
-        $this->container['rate'] = $data['rate'] ?? null;
-    }
-
-    /**
-     * Show all the invalid properties with reasons.
-     *
-     * @return array invalid properties with reasons
-     */
-    public function listInvalidProperties(): array
-    {
-        $invalidProperties = [];
-        return $invalidProperties;
-    }
-
-    /**
-     * Validate all the properties in the model
-     * return true if all passed
-     *
-     * @return bool True if all properties are valid
-     */
-    public function valid(): bool
-    {
-        return count($this->listInvalidProperties()) === 0;
-    }
-
-
-    /**
-     * Gets from
-     *
-     * @return string
-     */
     public function getFrom(): string
     {
-        return $this->container['from'];
+        return $this->from;
     }
 
-    /**
-     * Sets from
-     *
-     * @param string $from from
-     *
-     * @return $this
-     */
-    public function setFrom(string $from): ExchangeRate
+    public function setFrom(string $from): void
     {
-        $this->container['from'] = $from;
-
-        return $this;
+        $this->from = $from;
     }
 
-    /**
-     * Gets to
-     *
-     * @return string
-     */
     public function getTo(): string
     {
-        return $this->container['to'];
+        return $this->to;
     }
 
-    /**
-     * Sets to
-     *
-     * @param string $to to
-     *
-     * @return $this
-     */
-    public function setTo($to): ExchangeRate
+    public function setTo(string $to): void
     {
-        $this->container['to'] = $to;
-
-        return $this;
+        $this->to = $to;
     }
 
-    /**
-     * Gets rate
-     *
-     * @return double
-     */
     public function getRate(): float
     {
-        return $this->container['rate'];
+        return $this->rate;
     }
 
-    /**
-     * Sets rate
-     *
-     * @param double $rate rate
-     *
-     * @return $this
-     */
-    public function setRate($rate): ExchangeRate
+    public function setRate(float $rate): void
     {
-        $this->container['rate'] = $rate;
-
-        return $this;
+        $this->rate = $rate;
     }
 
-    /**
-     * Returns true if offset exists. False otherwise.
-     *
-     * @param integer $offset Offset
-     *
-     * @return boolean
-     */
-    public function offsetExists($offset): bool
+    public function getAsk(): float
     {
-        return isset($this->container[$offset]);
+        return $this->ask;
     }
 
-    /**
-     * Gets offset.
-     *
-     * @param integer $offset Offset
-     *
-     * @return mixed
-     */
-    public function offsetGet($offset)
+    public function setAsk(float $ask): void
     {
-        return $this->container[$offset] ?? null;
+        $this->ask = $ask;
     }
 
-    /**
-     * Sets value based on offset.
-     *
-     * @param integer $offset Offset
-     * @param mixed $value Value to be set
-     *
-     * @return void
-     */
-    public function offsetSet($offset, $value)
+    public function getBid(): float
     {
-        if (is_null($offset)) {
-            $this->container[] = $value;
-        } else {
-            $this->container[$offset] = $value;
-        }
+        return $this->bid;
     }
 
-    /**
-     * Unsets offset.
-     *
-     * @param integer $offset Offset
-     *
-     * @return void
-     */
-    public function offsetUnset($offset)
+    public function setBid(float $bid): void
     {
-        unset($this->container[$offset]);
-    }
-
-    /**
-     * Return Container Map
-     * @return array
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
-     * Gets the string presentation of the object
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
-
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        $this->bid = $bid;
     }
 }

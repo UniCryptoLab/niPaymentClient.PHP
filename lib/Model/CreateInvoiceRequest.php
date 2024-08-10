@@ -1,664 +1,184 @@
 <?php
 
-namespace UniPayment\Client\Model;
+namespace UniPayment\SDK\Model;
 
-use \ArrayAccess;
-use \UniPayment\Client\ObjectSerializer;
+
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
- * CreateInvoiceRequest Class Doc Comment
+ * Create Invoice Request
  *
  * @category Class
- * @package  UniPayment\Client
+ * @package  UniPayment\SDK\Model
  */
-class CreateInvoiceRequest implements ModelInterface, ArrayAccess
+class CreateInvoiceRequest
 {
-    const DISCRIMINATOR = null;
+    #[SerializedName('app_id')]
+    private string $appId;
+    #[SerializedName('price_amount')]
+    private float $priceAmount;
+    #[SerializedName('price_currency')]
+    private string $priceCurrency;
+    #[SerializedName('pay_currency')]
+    private string $payCurrency;
+    #[SerializedName('payment_method_type')]
+    private string $paymentMethodType;
+    private string $payNetwork;
+    #[SerializedName('notify_url')]
+    private string $notifyURL;
+    #[SerializedName('redirect_url')]
+    private string $redirectURL;
+    #[SerializedName('order_id')]
+    private string $orderId;
+    private string $title;
+    private string $description;
+    private string $lang;
+    #[SerializedName('ext_args')]
+    private string $extArgs;
 
     /**
-     * The original name of the model.
-     *
-     * @var string
+     * @var ConfirmSpeed
      */
-    protected static $modelName = 'CreateInvoiceRequest';
+    #[SerializedName('confirm_speed')]
+    private ConfirmSpeed $confirmSpeed;
 
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
-    protected static $fieldTypes = [
-        'app_id' => 'string',
-        'title' => 'string',
-        'description' => 'string',
-        'lang' => 'string',
-        'price_amount' => 'double',
-        'price_currency' => 'string',
-        'network' => 'string',
-        'pay_currency' => 'string',
-        'notify_url' => 'string',
-        'redirect_url' => 'string',
-        'order_id' => 'string',
-        'ext_args' => 'string',
-        'confirm_speed' => 'string'];
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
-    protected static $fieldFormats = [
-        'app_id' => null,
-        'title' => null,
-        'description' => null,
-        'lang' => null,
-        'price_amount' => 'double',
-        'price_currency' => null,
-        'network' => null,
-        'pay_currency' => null,
-        'notify_url' => null,
-        'redirect_url' => null,
-        'order_id' => null,
-        'ext_args' => null,
-        'confirm_speed' => null];
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function fieldTypes(): array
+    public function getAppId(): ?string
     {
-        return self::$fieldTypes;
+        return $this->appId;
     }
 
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function fieldFormats(): array
+    public function setAppId(string $appId): void
     {
-        return self::$fieldFormats;
+        $this->appId = $appId;
     }
 
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [
-        'app_id' => 'app_id',
-        'title' => 'title',
-        'description' => 'description',
-        'lang' => 'lang',
-        'price_amount' => 'price_amount',
-        'price_currency' => 'price_currency',
-        'network' => 'network',
-        'pay_currency' => 'pay_currency',
-        'notify_url' => 'notify_url',
-        'redirect_url' => 'redirect_url',
-        'order_id' => 'order_id',
-        'ext_args' => 'ext_args',
-        'confirm_speed' => 'confirm_speed'];
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-        'app_id' => 'setAppId',
-        'title' => 'setTitle',
-        'description' => 'setDescription',
-        'lang' => 'setLang',
-        'price_amount' => 'setPriceAmount',
-        'price_currency' => 'setPriceCurrency',
-        'network' => 'setNetwork',
-        'pay_currency' => 'setPayCurrency',
-        'notify_url' => 'setNotifyUrl',
-        'redirect_url' => 'setRedirectUrl',
-        'order_id' => 'setOrderId',
-        'ext_args' => 'setExtArgs',
-        'confirm_speed' => 'setConfirmSpeed'];
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-        'app_id' => 'getAppId',
-        'title' => 'getTitle',
-        'description' => 'getDescription',
-        'lang' => 'getLang',
-        'price_amount' => 'getPriceAmount',
-        'price_currency' => 'getPriceCurrency',
-        'network' => 'getNetwork',
-        'pay_currency' => 'getPayCurrency',
-        'notify_url' => 'getNotifyUrl',
-        'redirect_url' => 'getRedirectUrl',
-        'order_id' => 'getOrderId',
-        'ext_args' => 'getExtArgs',
-        'confirm_speed' => 'getConfirmSpeed'];
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap(): array
+    public function getPriceAmount(): ?float
     {
-        return self::$attributeMap;
+        return $this->priceAmount;
     }
 
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters(): array
+    public function setPriceAmount(float $priceAmount): void
     {
-        return self::$setters;
+        $this->priceAmount = $priceAmount;
     }
 
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters(): array
+    public function getPriceCurrency(): ?string
     {
-        return self::$getters;
+        return $this->priceCurrency;
     }
 
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName(): string
+    public function setPriceCurrency(string $priceCurrency): void
     {
-        return self::$modelName;
+        $this->priceCurrency = $priceCurrency;
     }
 
-    const CONFIRM_SPEED_LOW = 'low';
-    const CONFIRM_SPEED_MEDIUM = 'medium';
-    const CONFIRM_SPEED_HIGH = 'high';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getConfirmSpeedAllowableValues(): array
+    public function getPayCurrency(): ?string
     {
-        return [
-            self::CONFIRM_SPEED_LOW,
-            self::CONFIRM_SPEED_MEDIUM,
-            self::CONFIRM_SPEED_HIGH,];
+        return $this->payCurrency;
     }
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var array
-     */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param array|null $data Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
+    public function setPayCurrency(string $payCurrency): void
     {
-        $this->container['app_id'] = $data['app_id'] ?? null;
-        $this->container['title'] = $data['title'] ?? null;
-        $this->container['description'] = $data['description'] ?? null;
-        $this->container['lang'] = $data['lang'] ?? null;
-        $this->container['price_amount'] = $data['price_amount'] ?? null;
-        $this->container['price_currency'] = $data['price_currency'] ?? null;
-        $this->container['network'] = $data['network'] ?? null;
-        $this->container['pay_currency'] = $data['pay_currency'] ?? null;
-        $this->container['notify_url'] = $data['notify_url'] ?? null;
-        $this->container['redirect_url'] = $data['redirect_url'] ?? null;
-        $this->container['order_id'] = $data['order_id'] ?? null;
-        $this->container['ext_args'] = $data['ext_args'] ?? null;
-        $this->container['confirm_speed'] = $data['confirm_speed'] ?? null;
+        $this->payCurrency = $payCurrency;
     }
 
-    /**
-     * Show all the invalid properties with reasons.
-     *
-     * @return array invalid properties with reasons
-     */
-    public function listInvalidProperties(): array
+    public function getPaymentMethodType(): ?string
     {
-        $invalidProperties = [];
-
-        $allowedValues = $this->getConfirmSpeedAllowableValues();
-        if (!is_null($this->container['confirm_speed']) && !in_array($this->container['confirm_speed'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'confirm_speed', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
-
-        return $invalidProperties;
+        return $this->paymentMethodType;
     }
 
-    /**
-     * Validate all the properties in the model
-     * return true if all passed
-     *
-     * @return bool True if all properties are valid
-     */
-    public function valid(): bool
+    public function setPaymentMethodType(string $paymentMethodType): void
     {
-        return count($this->listInvalidProperties()) === 0;
+        $this->paymentMethodType = $paymentMethodType;
     }
 
-    /**
-     * Gets app_id
-     *
-     * @return string
-     */
-    public function getAppId()
+    public function getPayNetwork(): ?string
     {
-        return $this->container['app_id'];
+        return $this->payNetwork;
     }
 
-    /**
-     * Sets app_id
-     *
-     * @param string $title title
-     *
-     * @return $this
-     */
-    public function setAppId(string $title): CreateInvoiceRequest
+    public function setPayNetwork(string $payNetwork): void
     {
-        $this->container['app_id'] = $title;
-
-        return $this;
+        $this->payNetwork = $payNetwork;
     }
 
-    /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getNotifyURL(): ?string
     {
-        return $this->container['title'];
+        return $this->notifyURL;
     }
 
-    /**
-     * Sets title
-     *
-     * @param string $title title
-     *
-     * @return $this
-     */
-    public function setTitle(string $title): CreateInvoiceRequest
+    public function setNotifyURL(string $notifyURL): void
     {
-        $this->container['title'] = $title;
-
-        return $this;
+        $this->notifyURL = $notifyURL;
     }
 
-    /**
-     * Gets description
-     *
-     * @return string
-     */
-    public function getDescription()
+    public function getRedirectURL(): ?string
     {
-        return $this->container['description'];
+        return $this->redirectURL;
     }
 
-    /**
-     * Sets description
-     *
-     * @param string $description description
-     *
-     * @return $this
-     */
-    public function setDescription(string $description): CreateInvoiceRequest
+    public function setRedirectURL(string $redirectURL): void
     {
-        $this->container['description'] = $description;
-
-        return $this;
+        $this->redirectURL = $redirectURL;
     }
 
-    /**
-     * Gets lang
-     *
-     * @return string
-     */
-    public function getLang()
+    public function getOrderId(): ?string
     {
-        return $this->container['lang'];
+        return $this->orderId;
     }
 
-    /**
-     * Sets lang
-     *
-     * @param string $lang lang
-     *
-     * @return $this
-     */
-    public function setLang(string $lang): CreateInvoiceRequest
+    public function setOrderId(string $orderId): void
     {
-        $this->container['lang'] = $lang;
-
-        return $this;
+        $this->orderId = $orderId;
     }
 
-    /**
-     * Gets price_amount
-     *
-     * @return double
-     */
-    public function getPriceAmount()
+    public function getTitle(): ?string
     {
-        return $this->container['price_amount'];
+        return $this->title;
     }
 
-    /**
-     * Sets price_amount
-     *
-     * @param double $price_amount price_amount
-     *
-     * @return $this
-     */
-    public function setPriceAmount(float $price_amount): CreateInvoiceRequest
+    public function setTitle(string $title): void
     {
-        $this->container['price_amount'] = $price_amount;
-
-        return $this;
+        $this->title = $title;
     }
 
-    /**
-     * Gets price_currency
-     *
-     * @return string
-     */
-    public function getPriceCurrency()
+    public function getDescription(): ?string
     {
-        return $this->container['price_currency'];
+        return $this->description;
     }
 
-    /**
-     * Sets price_currency
-     *
-     * @param string $price_currency price_currency
-     *
-     * @return $this
-     */
-    public function setPriceCurrency(string $price_currency): CreateInvoiceRequest
+    public function setDescription(string $description): void
     {
-        $this->container['price_currency'] = $price_currency;
-
-        return $this;
+        $this->description = $description;
     }
 
-     /**
-     * Gets network
-     *
-     * @return string
-     */
-    public function getNetwork()
+    public function getLang(): ?string
     {
-        return $this->container['network'];
+        return $this->lang;
     }
 
-    /**
-     * Sets network
-     *
-     * @param string $network network
-     *
-     * @return $this
-     */
-    public function setNetwork(string $network): CreateInvoiceRequest
+    public function setLang(string $lang): void
     {
-        $this->container['network'] = $network;
-
-        return $this;
+        $this->lang = $lang;
     }
 
-    /**
-     * Gets pay_currency
-     *
-     * @return string
-     */
-    public function getPayCurrency()
+    public function getExtArgs(): ?string
     {
-        return $this->container['pay_currency'];
+        return $this->extArgs;
     }
 
-    /**
-     * Sets pay_currency
-     *
-     * @param string $pay_currency pay_currency
-     *
-     * @return $this
-     */
-    public function setPayCurrency(string $pay_currency): CreateInvoiceRequest
+    public function setExtArgs(string $extArgs): void
     {
-        $this->container['pay_currency'] = $pay_currency;
-
-        return $this;
+        $this->extArgs = $extArgs;
     }
 
-    /**
-     * Gets notify_url
-     *
-     * @return string
-     */
-    public function getNotifyUrl()
+    public function getConfirmSpeed(): ?ConfirmSpeed
     {
-        return $this->container['notify_url'];
+        return $this->confirmSpeed;
     }
 
-    /**
-     * Sets notify_url
-     *
-     * @param string $notify_url notify_url
-     *
-     * @return $this
-     */
-    public function setNotifyUrl(string $notify_url): CreateInvoiceRequest
+    public function setConfirmSpeed(ConfirmSpeed $confirmSpeed): void
     {
-        $this->container['notify_url'] = $notify_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets redirect_url
-     *
-     * @return string
-     */
-    public function getRedirectUrl()
-    {
-        return $this->container['redirect_url'];
-    }
-
-    /**
-     * Sets redirect_url
-     *
-     * @param string $redirect_url redirect_url
-     *
-     * @return $this
-     */
-    public function setRedirectUrl(string $redirect_url): CreateInvoiceRequest
-    {
-        $this->container['redirect_url'] = $redirect_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets order_id
-     *
-     * @return string
-     */
-    public function getOrderId()
-    {
-        return $this->container['order_id'];
-    }
-
-    /**
-     * Sets order_id
-     *
-     * @param string $order_id order_id
-     *
-     * @return $this
-     */
-    public function setOrderId(string $order_id): CreateInvoiceRequest
-    {
-        $this->container['order_id'] = $order_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets ext_args
-     *
-     * @return string
-     */
-    public function getExtArgs()
-    {
-        return $this->container['ext_args'];
-    }
-
-    /**
-     * Sets ext_args
-     *
-     * @param string $ext_args ext_args
-     *
-     * @return $this
-     */
-    public function setExtArgs(string $ext_args): CreateInvoiceRequest
-    {
-        $this->container['ext_args'] = $ext_args;
-
-        return $this;
-    }
-
-    /**
-     * Gets confirm_speed
-     *
-     * @return string
-     */
-    public function getConfirmSpeed()
-    {
-        return $this->container['confirm_speed'];
-    }
-
-    /**
-     * Sets confirm_speed
-     *
-     * @param string $confirm_speed confirm_speed
-     *
-     * @return $this
-     */
-    public function setConfirmSpeed(string $confirm_speed): CreateInvoiceRequest
-    {
-        $allowedValues = $this->getConfirmSpeedAllowableValues();
-        if (!in_array($confirm_speed, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'confirm_speed', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['confirm_speed'] = $confirm_speed;
-
-        return $this;
-    }
-
-    /**
-     * Returns true if offset exists. False otherwise.
-     *
-     * @param integer $offset Offset
-     *
-     * @return boolean
-     */
-    public function offsetExists($offset)
-    {
-        return isset($this->container[$offset]);
-    }
-
-    /**
-     * Gets offset.
-     *
-     * @param integer $offset Offset
-     *
-     * @return mixed
-     */
-    public function offsetGet($offset)
-    {
-        return $this->container[$offset] ?? null;
-    }
-
-    /**
-     * Sets value based on offset.
-     *
-     * @param integer $offset Offset
-     * @param mixed $value Value to be set
-     *
-     * @return void
-     */
-    public function offsetSet($offset, $value)
-    {
-        if (is_null($offset)) {
-            $this->container[] = $value;
-        } else {
-            $this->container[$offset] = $value;
-        }
-    }
-
-    /**
-     * Unsets offset.
-     *
-     * @param integer $offset Offset
-     *
-     * @return void
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->container[$offset]);
-    }
-
-    /**
-     * Return Container Map
-     * @return array
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
-     * Gets the string presentation of the object
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
-
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        $this->confirmSpeed = $confirmSpeed;
     }
 }

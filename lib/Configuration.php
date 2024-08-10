@@ -3,77 +3,75 @@
  * Configuration
  */
 
-namespace UniPayment\Client;
+namespace UniPayment\SDK;
 
 /**
  * Configuration
  */
-class Configuration
+final class Configuration
 {
-    private static $defaultConfiguration;
-
     /**
      * Client ID
      *
      * @var string
      */
-    protected $clientId = '';
+    protected string $clientId = '';
 
     /**
      * Client Secret
      *
      * @var string
      */
-    protected $clientSecret = '';
+    protected string $clientSecret = '';
 
     /**
      * Api Host
      *
      * @var string
      */
-    protected $apiHost = 'https://api.unipayment.io';
+    protected string $apiHost = 'https://api.unipayment.io';
 
     /**
      * Sandbox switch (default set to false)
      *
      * @var bool
      */
-    protected $isSandbox = false;
+    protected bool $isSandbox = false;
 
     /**
      * Api Version
      *
      * @var string
      */
-    protected $apiVersion = '1.0';
+    protected string $apiVersion = '1.0';
 
     /**
-     * User agent of the HTTP request
+     * App ID
      *
      * @var string
      */
-    protected $userAgent = 'unipayment_sdk_php/1.1.2';
+    protected string $appId = '';
 
     /**
      * Debug switch (default set to false)
      *
      * @var bool
      */
-    protected $debug = false;
+    protected bool $debug = false;
 
     /**
      * Debug file location (log to STDOUT by default)
      *
      * @var string
      */
-    protected $debugFile = 'php://output';
+    protected string $debugFile = 'php://output';
 
     /**
      * Debug file location (log to STDOUT by default)
      *
      * @var string
      */
-    protected $tempFolderPath;
+    protected string $tempFolderPath;
 
     /**
      * Constructor
@@ -81,6 +79,7 @@ class Configuration
     public function __construct()
     {
         $this->tempFolderPath = sys_get_temp_dir();
+        $this->setIsSandbox(true);
     }
 
     /**
@@ -88,12 +87,10 @@ class Configuration
      *
      * @param string $clientId Client ID
      *
-     * @return $this
      */
-    public function setClientId($clientId)
+    public function setClientId(string $clientId): void
     {
         $this->clientId = $clientId;
-        return $this;
     }
 
     /**
@@ -101,7 +98,7 @@ class Configuration
      *
      * @return string Client ID
      */
-    public function getClientId()
+    public function getClientId(): string
     {
         return $this->clientId;
     }
@@ -109,14 +106,12 @@ class Configuration
     /**
      * Set Client Secret
      *
-     * @param string $clientSecret  Client Secret
+     * @param string $clientSecret Client Secret
      *
-     * @return $this
      */
-    public function setClientSecret($clientSecret)
+    public function setClientSecret(string $clientSecret): void
     {
         $this->clientSecret = $clientSecret;
-        return $this;
     }
 
     /**
@@ -124,7 +119,7 @@ class Configuration
      *
      * @return string API key
      */
-    public function getClientSecret()
+    public function getClientSecret(): string
     {
         return $this->clientSecret;
     }
@@ -134,12 +129,10 @@ class Configuration
      *
      * @param string $apiHost API Host
      *
-     * @return $this
      */
-    public function setApiHost($apiHost)
+    public function setApiHost(string $apiHost): void
     {
         $this->apiHost = $apiHost;
-        return $this;
     }
 
     /**
@@ -147,7 +140,7 @@ class Configuration
      *
      * @return string API Host
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->apiHost;
     }
@@ -157,20 +150,15 @@ class Configuration
      *
      * @param bool $isSandbox IsSandbox flag
      *
-     * @return $this
      */
-    public function setIsSandbox($isSandbox)
+    public function setIsSandbox(bool $isSandbox): void
     {
         $this->isSandbox = $isSandbox;
-        if($this->isSandbox)
-        {
-            $this->apiHost="https://sandbox-api.unipayment.io";
+        if ($this->isSandbox) {
+            $this->apiHost = "https://sandbox-api.unipayment.io";
+        } else {
+            $this->apiHost = "https://api.unipayment.io";
         }
-        else
-        {
-            $this->apiHost="https://api.unipayment.io";
-        }
-        return $this;
     }
 
     /**
@@ -178,7 +166,7 @@ class Configuration
      *
      * @return bool
      */
-    public function getIsSandbox()
+    public function getIsSandbox(): bool
     {
         return $this->isSandbox;
     }
@@ -188,12 +176,10 @@ class Configuration
      *
      * @param string $apiVersion API Version
      *
-     * @return $this
      */
-    public function setApiVersion($apiVersion)
+    public function setApiVersion(string $apiVersion): void
     {
         $this->apiVersion = $apiVersion;
-        return $this;
     }
 
     /**
@@ -201,37 +187,30 @@ class Configuration
      *
      * @return string API Version
      */
-    public function getApiVersion()
+    public function getApiVersion(): string
     {
         return $this->apiVersion;
     }
 
     /**
-     * Sets the user agent of the api client
+     * Sets the App Id
      *
-     * @param string $userAgent the user agent of the api client
+     * @param string $appId App Id
      *
-     * @return $this
-     * @throws \InvalidArgumentException
      */
-    public function setUserAgent($userAgent)
+    public function setAppId(string $appId): void
     {
-        if (!is_string($userAgent)) {
-            throw new \InvalidArgumentException('User-agent must be a string.');
-        }
-
-        $this->userAgent = $userAgent;
-        return $this;
+        $this->appId = $appId;
     }
 
     /**
-     * Gets the user agent of the api client
+     * Gets the API Version
      *
-     * @return string user agent
+     * @return string API Version
      */
-    public function getUserAgent()
+    public function getAppId(): string
     {
-        return $this->userAgent . ' (' . php_uname('s') . ' ' . php_uname('r') . ')';
+        return $this->appId;
     }
 
     /**
@@ -239,12 +218,10 @@ class Configuration
      *
      * @param bool $debug Debug flag
      *
-     * @return $this
      */
-    public function setDebug($debug)
+    public function setDebug(bool $debug): void
     {
         $this->debug = $debug;
-        return $this;
     }
 
     /**
@@ -252,7 +229,7 @@ class Configuration
      *
      * @return bool
      */
-    public function getDebug()
+    public function getDebug(): bool
     {
         return $this->debug;
     }
@@ -262,12 +239,10 @@ class Configuration
      *
      * @param string $debugFile Debug file
      *
-     * @return $this
      */
-    public function setDebugFile($debugFile)
+    public function setDebugFile(string $debugFile): void
     {
         $this->debugFile = $debugFile;
-        return $this;
     }
 
     /**
@@ -275,7 +250,7 @@ class Configuration
      *
      * @return string
      */
-    public function getDebugFile()
+    public function getDebugFile(): string
     {
         return $this->debugFile;
     }
@@ -285,12 +260,10 @@ class Configuration
      *
      * @param string $tempFolderPath Temp folder path
      *
-     * @return $this
      */
-    public function setTempFolderPath($tempFolderPath)
+    public function setTempFolderPath(string $tempFolderPath): void
     {
         $this->tempFolderPath = $tempFolderPath;
-        return $this;
     }
 
     /**
@@ -298,35 +271,9 @@ class Configuration
      *
      * @return string Temp folder path
      */
-    public function getTempFolderPath()
+    public function getTempFolderPath(): string
     {
         return $this->tempFolderPath;
-    }
-
-    /**
-     * Gets the default configuration instance
-     *
-     * @return Configuration
-     */
-    public static function getDefaultConfiguration()
-    {
-        if (self::$defaultConfiguration === null) {
-            self::$defaultConfiguration = new Configuration();
-        }
-
-        return self::$defaultConfiguration;
-    }
-
-    /**
-     * Sets the detault configuration instance
-     *
-     * @param Configuration $config An instance of the Configuration Object
-     *
-     * @return void
-     */
-    public static function setDefaultConfiguration(Configuration $config)
-    {
-        self::$defaultConfiguration = $config;
     }
 
     /**
@@ -334,14 +281,13 @@ class Configuration
      *
      * @return string The report for debugging
      */
-    public static function toDebugReport()
+    public function toDebugReport(): string
     {
         $report = 'PHP SDK (UniPayment\Client) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 1.0.0' . PHP_EOL;
-        $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
-
+        $report .= '    Temp Folder Path: ' . $this->getTempFolderPath() . PHP_EOL;
         return $report;
     }
 
