@@ -18,6 +18,7 @@ class BaseTest extends TestCase
     protected WalletAPI $walletAPI;
     protected PaymentAPI $paymentAPI;
     protected BeneficiaryAPI $beneficiaryAPI;
+    protected WebhookAPI $webhookAPI;
 
     /**
      * Setup before running each test case
@@ -37,5 +38,6 @@ class BaseTest extends TestCase
         $this->walletAPI = new WalletAPI($this->configuration);
         $this->paymentAPI = new PaymentAPI($this->configuration);
         $this->beneficiaryAPI = new BeneficiaryAPI($this->configuration);
+        $this->webhookAPI = new WebhookAPI($this->configuration);
     }
 }

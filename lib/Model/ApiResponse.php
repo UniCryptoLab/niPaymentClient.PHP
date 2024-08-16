@@ -6,7 +6,7 @@ class ApiResponse
 {
     private string $code;
     private string $msg;
-    private object $data;
+    private mixed $data;
 
     public function getCode(): string
     {
@@ -28,12 +28,12 @@ class ApiResponse
         $this->msg = $msg;
     }
 
-    public function getData(): object
+    public function getData(): mixed
     {
         return $this->data;
     }
 
-    public function setData(object $data): void
+    public function setData(mixed $data): void
     {
         $this->data = $data;
     }

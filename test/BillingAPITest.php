@@ -23,6 +23,7 @@ class BillingAPITest extends BaseTest
         $createInvoiceRequest->setPriceCurrency('USD');
         $createInvoiceRequest->setLang("en");
         $createInvoiceRequest->setExtArgs("Merchant Pass Through Data");
+        $createInvoiceRequest->setNotifyURL('https://en7exsmaa68jo.x.pipedream.net');
 
         $createInvoiceResponse = $this->billingAPI->createInvoice($createInvoiceRequest);
         $this->assertNotNull($createInvoiceResponse);
