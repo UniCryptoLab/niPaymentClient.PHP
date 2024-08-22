@@ -87,7 +87,6 @@ class Invoice
 
     /**
      * @SerializedName("host_to_host_data")
-     * @var HostToHostData
      */
     private ?array $hostToHostData = null;
 
