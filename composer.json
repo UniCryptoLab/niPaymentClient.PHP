@@ -20,13 +20,13 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": ">=7.4 || >=8.0",
     "ext-curl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
     "guzzlehttp/guzzle": ">=7.9.2",
-    "symfony/serializer": ">=5.4.42",
-    "symfony/property-access": ">=v4.4.44",
+    "symfony/serializer": "^5.4.42 || ^v6.4.10",
+    "symfony/serializer": "^5.4.42 || ^v6.4.10",
     "doctrine/annotations": ">=2.0.1",
     "phpdocumentor/reflection-docblock": ">=5.4.1",
     "monolog/monolog": ">=2.9.3"
