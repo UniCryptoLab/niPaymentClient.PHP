@@ -43,19 +43,13 @@ class Payment
     private ?string $note = null;
     private PaymentStatus $status;
     /**
-     * @var DateTime
-     */
-    /**
      * @SerializedName("create_time")
      */
-    private mixed $createTime;
-    /**
-     * @var DateTime
-     */
+    private string $createTime;
     /**
      * @SerializedName("update_time")
      */
-    private mixed $updateTime;
+    private string $updateTime;
 
     public function getId(): string
     {
@@ -197,28 +191,22 @@ class Payment
         $this->status = $status;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getCreateTime(): mixed
+    public function getCreateTime(): string
     {
         return $this->createTime;
     }
 
-    public function setCreateTime(mixed $createTime): void
+    public function setCreateTime(string $createTime): void
     {
         $this->createTime = $createTime;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getUpdateTime(): mixed
+    public function getUpdateTime(): string
     {
         return $this->updateTime;
     }
 
-    public function setUpdateTime(mixed $updateTime): void
+    public function setUpdateTime(string $updateTime): void
     {
         $this->updateTime = $updateTime;
     }

@@ -13,17 +13,17 @@ class InvoiceDetail extends Invoice
     /**
      * @var Transaction[]
      */
-    private mixed $transactions;
+    private array $transactions;
 
     /**
      * @return Transaction[]
      */
-    public function getTransactions(): mixed
+    public function getTransactions(): array
     {
         return $this->transactions;
     }
 
-    public function setTransactions(mixed $transactions): void
+    public function setTransactions(array $transactions): void
     {
         $this->transactions = $transactions;
     }

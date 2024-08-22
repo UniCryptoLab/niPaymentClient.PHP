@@ -5,6 +5,8 @@ namespace UniPayment\SDK;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class ApiClient
 {
@@ -14,9 +16,16 @@ class ApiClient
      */
     protected Configuration $config;
 
+    /**
+     * @var Logger
+     */
+    private Logger $logger;
+
     public function __construct(Configuration $configuration)
     {
         $this->config = $configuration;
+        $this->logger = new Logger(ApiClient::class);
+        $this->logger->pushHandler(new StreamHandler($this->config->getDebugFile()));
     }
 
     /**
@@ -48,11 +57,21 @@ class ApiClient
             $options['form_params'] = $formParams;
         }
 
+        if ($this->config->getDebug()) {
+            $this->logger->debug("Request: {$method} {$endpoint}");
+        }
+
         try {
             $client = new Client(['base_uri' => $this->config->getHost()]);
             $response = $client->request($method, $endpoint, $options);
             $statusCode = $response->getStatusCode();
             $body = $response->getBody()->getContents();
+
+            if ($this->config->getDebug()) {
+                $this->logger->debug("Response Status Code: {$statusCode}");
+                $this->logger->debug("Response Body: {$body}");
+            }
+
             $json = json_decode($body, true);
             if ($statusCode >= 200 && $statusCode < 300) {
                 return [
@@ -67,6 +86,10 @@ class ApiClient
                 $response = $e->getResponse();
                 $statusCode = $response->getStatusCode();
                 $body = $response->getBody()->getContents();
+                if ($this->config->getDebug()) {
+                    $this->logger->debug("Response Status Code: {$statusCode}");
+                    $this->logger->debug("Response Body: {$body}");
+                }
                 $json = json_decode($body, true);
                 if ($json['msg']) {
                     throw new UnipaymentSDKException($json['msg'], $statusCode);

@@ -2,6 +2,7 @@
 
 namespace UniPayment\SDK;
 
+use Faker;
 use Ramsey\Uuid\Uuid;
 use UniPayment\SDK\Model\BankPaymentMethodDetail;
 use UniPayment\SDK\Model\Beneficiary;
@@ -12,9 +13,21 @@ use UniPayment\SDK\Model\PaymentMethod;
 use UniPayment\SDK\Model\QueryBeneficiaryRequest;
 use UniPayment\SDK\Model\Relationship;
 use UniPayment\SDK\Model\TransferMethod;
+use UniPayment\SDK\Utils\JsonSerializer;
 
 class BeneficiaryAPITest extends BaseTest
 {
+    private string $email;
+    private string $generatedName;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $faker = Faker\Factory::create();
+        $this->email = $faker->email;
+        $this->generatedName = $faker->name();
+    }
+
     /**
      * Test case for createBeneficiary
      * @throws UnipaymentSDKException
@@ -22,10 +35,11 @@ class BeneficiaryAPITest extends BaseTest
     public function testCreateBeneficiary()
     {
         $beneficiary = new Beneficiary();
-        $beneficiary->setName("Beneficiary 2");
-        $beneficiary->setEmail("beneficiary2@gmail.com");
+        $beneficiary->setName($this->generatedName);
+        $beneficiary->setEmail($this->email);
         $beneficiary->setType(BeneficiaryType::INDIVIDUAL);
         $beneficiary->setRelationship(Relationship::CUSTOMER);
+        print_r(JsonSerializer::toJson($beneficiary));
 
         $createBeneficiaryResponse = $this->beneficiaryAPI->createBeneficiary($beneficiary);
         $this->assertNotNull($createBeneficiaryResponse);
@@ -53,7 +67,7 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
-            return $beneficiary->getEmail() === 'beneficiary1@gmail.com';
+            return $beneficiary->getEmail() === $this->email;
         });
         $beneficiaryId = reset($beneficiaries)->getId();
         $queryBeneficiaryByIdResponse = $this->beneficiaryAPI->getBeneficiaryById($beneficiaryId);
@@ -70,7 +84,7 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
-            return $beneficiary->getEmail() === 'beneficiary1@gmail.com';
+            return $beneficiary->getEmail() === $this->email;
         });
 
         /** @var Beneficiary $beneficiary */
@@ -96,7 +110,7 @@ class BeneficiaryAPITest extends BaseTest
     {
         $beneficiary = new Beneficiary();
         $beneficiary->setName("Beneficiary 2");
-        $beneficiary->setEmail("beneficiary2@gmail.com");
+        $beneficiary->setEmail($this->email);
         $beneficiary->setType(BeneficiaryType::INDIVIDUAL);
         $beneficiary->setRelationship(Relationship::CUSTOMER);
 
@@ -115,7 +129,7 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
-            return $beneficiary->getEmail() === 'beneficiary1@gmail.com';
+            return $beneficiary->getEmail() === $this->email;
         });
 
         /** @var Beneficiary $beneficiary */
@@ -144,7 +158,7 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
-            return $beneficiary->getEmail() === 'beneficiary2@gmail.com';
+            return $beneficiary->getEmail() === $this->email;
         });
 
         /** @var Beneficiary $beneficiary */
@@ -165,7 +179,7 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
-            return $beneficiary->getEmail() === 'beneficiary1@gmail.com';
+            return $beneficiary->getEmail() === $this->email;
         });
 
         /** @var Beneficiary $beneficiary */
@@ -200,7 +214,7 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
-            return $beneficiary->getEmail() === 'beneficiary1@gmail.com';
+            return $beneficiary->getEmail() === $this->email;
         });
 
         /** @var Beneficiary $beneficiary */
@@ -247,7 +261,7 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
-            return $beneficiary->getEmail() === 'beneficiary1@gmail.com';
+            return $beneficiary->getEmail() === $this->email;
         });
 
         /** @var Beneficiary $beneficiary */

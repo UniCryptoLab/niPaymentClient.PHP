@@ -34,6 +34,7 @@ class BillingAPITest extends BaseTest
 
         $createInvoiceResponse = $this->billingAPI->createInvoice($createInvoiceRequest);
         $this->assertNotNull($createInvoiceResponse);
+        $this->logResponse($createInvoiceResponse);
         $this->assertEquals('OK', $createInvoiceResponse->getCode());
     }
 
@@ -45,6 +46,7 @@ class BillingAPITest extends BaseTest
     {
         $queryInvoicesResponse = $this->billingAPI->queryInvoices(new QueryInvoicesRequest());
         $this->assertNotNull($queryInvoicesResponse);
+        $this->logResponse($queryInvoicesResponse);
         $this->assertEquals('OK', $queryInvoicesResponse->getCode());
     }
 
@@ -56,6 +58,7 @@ class BillingAPITest extends BaseTest
     {
         $getInvoiceByIdResponse = $this->billingAPI->getInvoiceById('SrAARgNrPgvveiBQtNc4gk');
         $this->assertNotNull($getInvoiceByIdResponse);
+        $this->logResponse($getInvoiceByIdResponse);
         $this->assertEquals('OK', $getInvoiceByIdResponse->getCode());
         $this->assertEquals(InvoiceErrorStatus::NONE, $getInvoiceByIdResponse->getData()->getErrorStatus());
         $this->assertEquals(InvoiceStatus::EXPIRED, $getInvoiceByIdResponse->getData()->getStatus());

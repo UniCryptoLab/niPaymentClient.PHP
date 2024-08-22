@@ -62,9 +62,6 @@ class CreateInvoiceRequest
     private string $extArgs;
 
     /**
-     * @var ConfirmSpeed
-     */
-    /**
      * @SerializedName("confirm_speed")
      */
     private ConfirmSpeed $confirmSpeed;

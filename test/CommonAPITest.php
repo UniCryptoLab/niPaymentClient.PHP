@@ -13,6 +13,7 @@ class CommonAPITest extends BaseTest
     {
         $pingResponse = $this->commonAPI->ping();
         $this->assertNotNull($pingResponse);
+        $this->logResponse($pingResponse);
         $this->assertEquals('OK', $pingResponse->getCode());
         $this->assertEquals('pong', $pingResponse->getMsg());
     }
@@ -25,6 +26,7 @@ class CommonAPITest extends BaseTest
     {
         $pingResponse = $this->commonAPI->ping(true);
         $this->assertNotNull($pingResponse);
+        $this->logResponse($pingResponse);
         $this->assertEquals('OK', $pingResponse->getCode());
         $this->assertEquals('pong', $pingResponse->getMsg());
     }
@@ -37,6 +39,7 @@ class CommonAPITest extends BaseTest
     {
         $queryIpsResponse = $this->commonAPI->queryIps();
         $this->assertNotNull($queryIpsResponse);
+        $this->logResponse($queryIpsResponse);
         $this->assertEquals('OK', $queryIpsResponse->getCode());
         $this->assertNotNull($queryIpsResponse->getData());
     }
@@ -49,6 +52,7 @@ class CommonAPITest extends BaseTest
     {
         $getCurrenciesResponse = $this->commonAPI->getCurrencies();
         $this->assertNotNull($getCurrenciesResponse);
+        $this->logResponse($getCurrenciesResponse);
         $this->assertEquals('OK', $getCurrenciesResponse->getCode());
         $this->assertEquals('Australian Dollar', $getCurrenciesResponse->getData()[0]->getName());
     }
@@ -61,6 +65,7 @@ class CommonAPITest extends BaseTest
     {
         $getExchangeRateByCurrencyPairResponse = $this->commonAPI->getExchangeRateByCurrencyPair('USD', 'BTC');
         $this->assertNotNull($getExchangeRateByCurrencyPairResponse);
+        $this->logResponse($getExchangeRateByCurrencyPairResponse);
         $this->assertEquals('OK', $getExchangeRateByCurrencyPairResponse->getCode());
         $this->assertEquals('BTC', $getExchangeRateByCurrencyPairResponse->getData()->getFrom());
     }
@@ -73,6 +78,7 @@ class CommonAPITest extends BaseTest
     {
         $getExchangeRateByFiatCurrencyResponse = $this->commonAPI->getExchangeRateByFiatCurrency('USD');
         $this->assertNotNull($getExchangeRateByFiatCurrencyResponse);
+        $this->logResponse($getExchangeRateByFiatCurrencyResponse);
         $this->assertEquals('OK', $getExchangeRateByFiatCurrencyResponse->getCode());
         $this->assertNotNull($getExchangeRateByFiatCurrencyResponse->getData());
     }

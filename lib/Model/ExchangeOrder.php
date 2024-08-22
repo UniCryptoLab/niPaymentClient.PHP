@@ -19,7 +19,7 @@ class ExchangeOrder extends Quote
     /**
      * @SerializedName("status")
      */
-    private mixed $status;
+    private string $status;
 
     /**
      * @SerializedName("exchange_amount")
@@ -32,7 +32,7 @@ class ExchangeOrder extends Quote
     /**
      * @SerializedName("create_time")
      */
-    private mixed $createTime;
+    private string $createTime;
 
     public function getId(): string
     {
@@ -44,12 +44,12 @@ class ExchangeOrder extends Quote
         $this->id = $id;
     }
 
-    public function getStatus(): mixed
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(mixed $status): void
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
@@ -64,15 +64,12 @@ class ExchangeOrder extends Quote
         $this->exchangeAmount = $exchangeAmount;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getCreateTime(): mixed
+    public function getCreateTime(): string
     {
         return $this->createTime;
     }
 
-    public function setCreateTime(mixed $createTime): void
+    public function setCreateTime(string $createTime): void
     {
         $this->createTime = $createTime;
     }

@@ -3,7 +3,6 @@
 namespace UniPayment\SDK\Model;
 
 use DateTime;
-use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * Transaction
@@ -20,7 +19,7 @@ class Transaction
     /**
      * @SerializedName("txn_type")
      */
-    private mixed $txnType;
+    private string $txnType;
     private Direction $direction;
     private string $note;
     /**
@@ -35,7 +34,7 @@ class Transaction
     /**
      * @SerializedName("create_time")
      */
-    private mixed $createTime;
+    private string $createTime;
 
     public function getId(): string
     {
@@ -77,12 +76,12 @@ class Transaction
         $this->balance = $balance;
     }
 
-    public function getTxnType(): mixed
+    public function getTxnType(): string
     {
         return $this->txnType;
     }
 
-    public function setTxnType(mixed $txnType): void
+    public function setTxnType(string $txnType): void
     {
         $this->txnType = $txnType;
     }
@@ -130,12 +129,12 @@ class Transaction
     /**
      * @return DateTime
      */
-    public function getCreateTime(): mixed
+    public function getCreateTime(): string
     {
         return $this->createTime;
     }
 
-    public function setCreateTime(mixed $createTime): void
+    public function setCreateTime(string $createTime): void
     {
         $this->createTime = $createTime;
     }
