@@ -85,6 +85,12 @@ class Invoice
      */
     private ?string $invoiceUrl;
 
+    /**
+     * @SerializedName("host_to_host_data")
+     * @var HostToHostData
+     */
+    private ?array $hostToHostData = null;
+
     public function getAppId(): string
     {
         return $this->appId;
@@ -295,6 +301,16 @@ class Invoice
     public function setInvoiceUrl(?string $invoiceUrl): void
     {
         $this->invoiceUrl = $invoiceUrl;
+    }
+
+    public function getHostToHostData(): ?array
+    {
+        return $this->hostToHostData;
+    }
+
+    public function setHostToHostData(?array $hostToHostData): void
+    {
+        $this->hostToHostData = $hostToHostData;
     }
 
 }
