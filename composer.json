@@ -20,13 +20,14 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": ">=7.4 || >=8.3",
     "ext-curl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
     "guzzlehttp/guzzle": ">=7.9.2",
     "symfony/serializer": ">=5.4.42",
     "symfony/property-access": ">=v5.4.40",
+    "doctrine/annotations": ">=2.0.1",
     "phpdocumentor/reflection-docblock": ">=5.4.1"
   },
   "require-dev": {
@@ -36,7 +37,10 @@
   "autoload": {
     "psr-4": {
       "UniPayment\\SDK\\": "lib/"
-    }
+    },
+    "exclude-from-classmap": [
+      "/test/"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

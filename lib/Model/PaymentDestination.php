@@ -15,42 +15,76 @@ class PaymentDestination
     private ?string $network;
     private ?string $address;
     private ?string $id;
-    #[SerializedName('owner_id')]
+    /**
+     * @SerializedName("owner_id")
+     */
     private ?string $ownerId;
-    #[SerializedName('asset_type')]
+    /**
+     * @SerializedName("asset_type")
+     */
     private ?string $assetType;
-    #[SerializedName('account_number')]
+    /**
+     * @SerializedName("account_number")
+     */
     private ?string $accountNumber;
-    #[SerializedName('friendly_name')]
+    /**
+     * @SerializedName("friendly_name")
+     */
     private ?string $friendlyName;
-    #[SerializedName('beneficiary_name')]
+    /**
+     * @SerializedName("beneficiary_name")
+     */
     private ?string $beneficiaryName;
-    #[SerializedName('beneficiary_address')]
+    /**
+     * @SerializedName("beneficiary_address")
+     */
     private ?string $beneficiaryAddress;
-    #[SerializedName('beneficiary_city')]
+    /**
+     * @SerializedName("beneficiary_city")
+     */
     private ?string $beneficiaryCity;
-    #[SerializedName('beneficiary_state')]
+    /**
+     * @SerializedName("beneficiary_state")
+     */
     private ?string $beneficiaryState;
-    #[SerializedName('beneficiary_country')]
+    /**
+     * @SerializedName("beneficiary_country")
+     */
     private ?string $beneficiaryCountry;
-    #[SerializedName('beneficiary_zipcode')]
+    /**
+     * @SerializedName("beneficiary_zipcode")
+     */
     private ?string $beneficiaryZipcode;
     private ?string $iban;
-    #[SerializedName('routing_number')]
+    /**
+     * @SerializedName("routing_number")
+     */
     private ?string $routing_number;
     private ?string $bic;
     private ?string $reference;
-    #[SerializedName('bank_name')]
+    /**
+     * @SerializedName("bank_name")
+     */
     private ?string $bankName;
-    #[SerializedName('bank_address')]
+    /**
+     * @SerializedName("bank_address")
+     */
     private ?string $bankAddress;
-    #[SerializedName('bank_country')]
+    /**
+     * @SerializedName("bank_country")
+     */
     private ?string $bankCountry;
-    #[SerializedName('intermediary_bank_name')]
+    /**
+     * @SerializedName("intermediary_bank_name")
+     */
     private ?string $intermediaryBankName;
-    #[SerializedName('intermediary_account_number')]
+    /**
+     * @SerializedName("intermediary_account_number")
+     */
     private ?string $intermediaryAccountNumber;
-    #[SerializedName('intermediary_bic')]
+    /**
+     * @SerializedName("intermediary_bic")
+     */
     private ?string $intermediaryBic;
 
     public function getNetwork(): ?string

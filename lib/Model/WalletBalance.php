@@ -12,12 +12,18 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class WalletBalance
 {
-    #[SerializedName('asset_type')]
+    /**
+     * @SerializedName("asset_type")
+     */
     private string $assetType;
     private float $balance;
-    #[SerializedName('frozen_balance')]
+    /**
+     * @SerializedName("frozen_balance")
+     */
     private float $frozenBalance;
-    #[SerializedName('reversed_balance')]
+    /**
+     * @SerializedName("reversed_balance")
+     */
     private float $reversedBalance;
     private float $available;
 

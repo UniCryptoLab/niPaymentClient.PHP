@@ -12,19 +12,29 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class CreatePaymentRequest
 {
-    #[SerializedName('from_account_id')]
+    /**
+     * @SerializedName("from_account_id")
+     */
     private string $fromAccountId;
-    #[SerializedName('asset_type')]
+    /**
+     * @SerializedName("asset_type")
+     */
     private string $assetType;
     private float $amount;
-    #[SerializedName('payment_method_id')]
+    /**
+     * @SerializedName("payment_method_id")
+     */
     private string $paymentMethodId;
-    #[SerializedName('to_account_id')]
+    /**
+     * @SerializedName("to_account_id")
+     */
     private string $toAccountId;
     private string $reason;
     private string $reference;
     private string $note;
-    #[SerializedName('unique_id')]
+    /**
+     * @SerializedName("unique_id")
+     */
     private string $uniqueId;
 
     public function getFromAccountId(): string

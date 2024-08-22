@@ -12,7 +12,9 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class UpdateSecretKeyRequest
 {
-    #[SerializedName('secret_key')]
+    /**
+     * @SerializedName("secret_key")
+     */
     private string $secretKey;
 
     public function getSecretKey(): string

@@ -16,16 +16,22 @@ class ExchangeOrder extends Quote
 {
     private string $id;
 
-    #[SerializedName('status')]
+    /**
+     * @SerializedName("status")
+     */
     private mixed $status;
 
-    #[SerializedName('exchange_amount')]
+    /**
+     * @SerializedName("exchange_amount")
+     */
     private float $exchangeAmount;
 
     /**
      * @var DateTime
      */
-    #[SerializedName('create_time')]
+    /**
+     * @SerializedName("create_time")
+     */
     private mixed $createTime;
 
     public function getId(): string

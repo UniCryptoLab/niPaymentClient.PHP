@@ -1,8 +1,6 @@
 <?php
 
 namespace UniPayment\SDK\Model;
-
-
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
@@ -13,33 +11,62 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class CreateInvoiceRequest
 {
-    #[SerializedName('app_id')]
+    /**
+     * @SerializedName("app_id")
+     */
     private string $appId;
-    #[SerializedName('price_amount')]
+    /**
+     * @SerializedName("price_amount")
+     */
     private float $priceAmount;
-    #[SerializedName('price_currency')]
+    /**
+     * @SerializedName("price_currency")
+     */
     private string $priceCurrency;
-    #[SerializedName('pay_currency')]
+    /**
+     * @SerializedName("pay_currency")
+     */
     private string $payCurrency;
-    #[SerializedName('payment_method_type')]
+    /**
+     * @SerializedName("payment_method_type")
+     */
     private string $paymentMethodType;
+
+    /**
+     * @SerializedName("host_to_host_mode")
+     */
+    private bool $hostToHostMode;
+
+    /**
+     * @SerializedName("network")
+     */
     private string $payNetwork;
-    #[SerializedName('notify_url')]
+    /**
+     * @SerializedName("notify_url")
+     */
     private string $notifyURL;
-    #[SerializedName('redirect_url')]
+    /**
+     * @SerializedName("redirect_url")
+     */
     private string $redirectURL;
-    #[SerializedName('order_id')]
+    /**
+     * @SerializedName("order_id")
+     */
     private string $orderId;
     private string $title;
     private string $description;
     private string $lang;
-    #[SerializedName('ext_args')]
+    /**
+     * @SerializedName("ext_args")
+     */
     private string $extArgs;
 
     /**
      * @var ConfirmSpeed
      */
-    #[SerializedName('confirm_speed')]
+    /**
+     * @SerializedName("confirm_speed")
+     */
     private ConfirmSpeed $confirmSpeed;
 
     public function getAppId(): ?string
@@ -90,6 +117,16 @@ class CreateInvoiceRequest
     public function setPaymentMethodType(string $paymentMethodType): void
     {
         $this->paymentMethodType = $paymentMethodType;
+    }
+
+    public function isHostToHostMode(): bool
+    {
+        return $this->hostToHostMode;
+    }
+
+    public function setHostToHostMode(bool $hostToHostMode): void
+    {
+        $this->hostToHostMode = $hostToHostMode;
     }
 
     public function getPayNetwork(): ?string

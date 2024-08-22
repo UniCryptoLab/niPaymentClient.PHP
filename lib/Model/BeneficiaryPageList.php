@@ -13,11 +13,17 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 class BeneficiaryPageList
 {
     private int $total;
-    #[SerializedName('page_no')]
+    /**
+     * @SerializedName("page_no")
+     */
     private int $pageNo;
-    #[SerializedName('page_count')]
+    /**
+     * @SerializedName("page_count")
+     */
     private int $pageCount;
-    #[SerializedName('page_size')]
+    /**
+     * @SerializedName("page_size")
+     */
     private int $pageSize;
 
     /**

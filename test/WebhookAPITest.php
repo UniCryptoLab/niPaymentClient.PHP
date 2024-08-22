@@ -19,7 +19,6 @@ class WebhookAPITest extends BaseTest
         $updateNotifyUrlResponse = $this->webhookAPI->updateNotifyUrl($updateNotifyUrlRequest);
         $this->assertNotNull($updateNotifyUrlResponse);
         $this->assertEquals('OK', $updateNotifyUrlResponse->getCode());
-        print JsonSerializer::toJson($updateNotifyUrlResponse);
     }
 
     /**

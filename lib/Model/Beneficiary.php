@@ -21,7 +21,9 @@ class Beneficiary
     private ?string $city = null;
     private ?string $state = null;
     private ?string $country = null;
-    #[SerializedName('zip_code')]
+    /**
+     * @SerializedName("zip_code")
+     */
     private ?string $zipcode;
 
     public function getId(): ?string

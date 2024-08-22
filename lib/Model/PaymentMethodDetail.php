@@ -13,7 +13,9 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 class PaymentMethodDetail
 {
     private ?string $id;
-    #[SerializedName('asset_type')]
+    /**
+     * @SerializedName("asset_type")
+     */
     private string $assetType;
 
     public function getId(): ?string

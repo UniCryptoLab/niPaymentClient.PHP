@@ -17,18 +17,24 @@ class Transaction
     private float $amount;
     private string $assetType;
     private float $balance;
-    #[SerializedName('txn_type')]
+    /**
+     * @SerializedName("txn_type")
+     */
     private mixed $txnType;
     private Direction $direction;
     private string $note;
-    #[SerializedName('ref_id')]
+    /**
+     * @SerializedName("ref_id")
+     */
     private string $referenceId;
     private TransactionData $data;
 
     /**
      * @var DateTime
      */
-    #[SerializedName('create_time')]
+    /**
+     * @SerializedName("create_time")
+     */
     private mixed $createTime;
 
     public function getId(): string

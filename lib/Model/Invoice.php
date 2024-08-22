@@ -3,7 +3,6 @@
 namespace UniPayment\SDK\Model;
 
 use DateTime;
-use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * Invoice
@@ -13,40 +12,77 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class Invoice
 {
-    #[SerializedName('app_id')]
+    /**
+     * @SerializedName("app_id")
+     */
     private string $appId;
-    #[SerializedName('invoice_id')]
+    /**
+     * @SerializedName("invoice_id")
+     */
     private string $invoiceId;
-    #[SerializedName('payment_method_type')]
-    private mixed $paymentMethodType;
-    #[SerializedName('order_id')]
+    /**
+     * @SerializedName("payment_method_type")
+     */
+    private string $paymentMethodType;
+
+    /**
+     * @SerializedName("host_to_host_mode")
+     */
+    private bool $hostToHostMode;
+    /**
+     * @SerializedName("order_id")
+     */
     private string $orderId;
-    #[SerializedName('price_amount')]
+    /**
+     * @SerializedName("price_amount")
+     */
     private float $priceAmount;
-    #[SerializedName('price_currency')]
+    /**
+     * @SerializedName("price_currency")
+     */
     private string $priceCurrency;
     private ?string $network = null;
     private ?string $address = null;
-    #[SerializedName('pay_amount')]
+    /**
+     * @SerializedName("pay_amount")
+     */
     private ?float $payAmount;
-    #[SerializedName('pay_currency')]
+    /**
+     * @SerializedName("pay_currency")
+     */
     private ?string $payCurrency;
-    #[SerializedName('exchange_rate')]
+    /**
+     * @SerializedName("exchange_rate")
+     */
     private ?float $exchangeRate;
-    #[SerializedName('paid_amount')]
+    /**
+     * @SerializedName("paid_amount")
+     */
     private ?float $paidAmount;
-    #[SerializedName('refunded_price_amount')]
+    /**
+     * @SerializedName("refunded_price_amount")
+     */
     private ?float $refundedPriceAmount;
-    #[SerializedName('create_time')]
-    private mixed $createTime;
-    #[SerializedName('expiration_time')]
-    private mixed $expirationTime;
-    #[SerializedName('confirm_speed')]
-    private mixed $confirmSpeed;
-    private mixed $status;
-    #[SerializedName('error_status')]
-    private mixed $errorStatus;
-    #[SerializedName('invoice_url')]
+    /**
+     * @SerializedName("create_time")
+     */
+    private string $createTime;
+    /**
+     * @SerializedName("expiration_time")
+     */
+    private string $expirationTime;
+    /**
+     * @SerializedName("confirm_speed")
+     */
+    private string $confirmSpeed;
+    private string $status;
+    /**
+     * @SerializedName("error_status")
+     */
+    private string $errorStatus;
+    /**
+     * @SerializedName("invoice_url")
+     */
     private ?string $invoiceUrl;
 
     public function getAppId(): string
@@ -72,14 +108,24 @@ class Invoice
     /**
      * @return PaymentMethodType
      */
-    public function getPaymentMethodType(): mixed
+    public function getPaymentMethodType(): string
     {
         return $this->paymentMethodType;
     }
 
-    public function setPaymentMethodType(mixed $paymentMethodType): void
+    public function setPaymentMethodType(string $paymentMethodType): void
     {
         $this->paymentMethodType = $paymentMethodType;
+    }
+
+    public function isHostToHostMode(): ?bool
+    {
+        return $this->hostToHostMode;
+    }
+
+    public function setHostToHostMode(?bool $hostToHostMode): void
+    {
+        $this->hostToHostMode = $hostToHostMode;
     }
 
     public function getOrderId(): string
@@ -185,25 +231,25 @@ class Invoice
     /**
      * @return DateTime
      */
-    public function getCreateTime(): mixed
+    public function getCreateTime(): string
     {
         return $this->createTime;
     }
 
-    public function setCreateTime(mixed $createTime): void
+    public function setCreateTime(string $createTime): void
     {
         $this->createTime = $createTime;
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getExpirationTime(): mixed
+    public function getExpirationTime(): string
     {
         return $this->expirationTime;
     }
 
-    public function setExpirationTime(mixed $expirationTime): void
+    public function setExpirationTime(string $expirationTime): void
     {
         $this->expirationTime = $expirationTime;
     }
@@ -211,32 +257,32 @@ class Invoice
     /**
      * @return ConfirmSpeed
      */
-    public function getConfirmSpeed(): mixed
+    public function getConfirmSpeed(): string
     {
         return $this->confirmSpeed;
     }
 
-    public function setConfirmSpeed(mixed $confirmSpeed): void
+    public function setConfirmSpeed(string $confirmSpeed): void
     {
         $this->confirmSpeed = $confirmSpeed;
     }
 
-    public function getStatus(): mixed
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(mixed $status): void
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
 
-    public function getErrorStatus(): mixed
+    public function getErrorStatus(): string
     {
         return $this->errorStatus;
     }
 
-    public function setErrorStatus(mixed $errorStatus): void
+    public function setErrorStatus(string $errorStatus): void
     {
         $this->errorStatus = $errorStatus;
     }

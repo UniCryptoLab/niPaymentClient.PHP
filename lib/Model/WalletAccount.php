@@ -12,15 +12,23 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class WalletAccount extends WalletBalance
 {
-    #[SerializedName('asset_type')]
+    /**
+     * @SerializedName("asset_type")
+     */
     private string $assetType;
     private string $id;
     private AccountType $type;
-    #[SerializedName('friendly_name')]
+    /**
+     * @SerializedName("friendly_name")
+     */
     private string $friendlyName;
-    #[SerializedName('account_number')]
+    /**
+     * @SerializedName("account_number")
+     */
     private ?string $accountNumber = null;
-    #[SerializedName('bank_account')]
+    /**
+     * @SerializedName("bank_account")
+     */
     private ?BankAccount $bankAccount = null;
     private string $status;
 

@@ -13,24 +13,42 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class Quote
 {
-    #[SerializedName('quote_id')]
+    /**
+     * @SerializedName("quote_id")
+     */
     private string $quoteId;
-    #[SerializedName('from_currency')]
+    /**
+     * @SerializedName("from_currency")
+     */
     private string $fromCurrency;
-    #[SerializedName('to_currency')]
+    /**
+     * @SerializedName("to_currency")
+     */
     private string $toCurrency;
-    #[SerializedName('requested_amount')]
+    /**
+     * @SerializedName("requested_amount")
+     */
     private float $requestedAmount;
-    #[SerializedName('exchange_rate')]
+    /**
+     * @SerializedName("exchange_rate")
+     */
     private ?float $exchangeRate;
-    #[SerializedName('gross_amount')]
+    /**
+     * @SerializedName("gross_amount")
+     */
     private ?float $grossAmount;
-    #[SerializedName('net_amount')]
+    /**
+     * @SerializedName("net_amount")
+     */
     private ?float $netAmount;
-    #[SerializedName('fee_currency')]
+    /**
+     * @SerializedName("fee_currency")
+     */
     private string $feeCurrency;
     private ?float $fee;
-    #[SerializedName('valid_until')]
+    /**
+     * @SerializedName("valid_until")
+     */
     private DateTime $validUtil;
 
     public function getQuoteId(): string

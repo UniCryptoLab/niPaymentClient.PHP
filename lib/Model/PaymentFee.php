@@ -12,23 +12,35 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class PaymentFee
 {
-    #[SerializedName('asset_type')]
+    /**
+     * @SerializedName("asset_type")
+     */
     private string $assetType;
     private string $network;
 
-    #[SerializedName('fee_type')]
+    /**
+     * @SerializedName("fee_type")
+     */
     private string $feeType;
 
-    #[SerializedName('fee_rate')]
+    /**
+     * @SerializedName("fee_rate")
+     */
     private float $feeRate;
 
-    #[SerializedName('flat_rate')]
+    /**
+     * @SerializedName("flat_rate")
+     */
     private float $flatRate;
 
-    #[SerializedName('min_txn_fee')]
+    /**
+     * @SerializedName("min_txn_fee")
+     */
     private ?float $minTransactionFee = null;
 
-    #[SerializedName('max_txn_fee')]
+    /**
+     * @SerializedName("max_txn_fee")
+     */
     private ?float $maxTransactionFee = null;
 
     public function getAssetType(): string

@@ -13,26 +13,44 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 class BankPaymentMethodDetail extends PaymentMethodDetail
 {
     private ?string $network;
-    #[SerializedName('account_number')]
+    /**
+     * @SerializedName("account_number")
+     */
     private ?string $accountNumber;
     private ?string $iban;
     private ?string $bic;
-    #[SerializedName('routing_number')]
+    /**
+     * @SerializedName("routing_number")
+     */
     private ?string $routingNumber;
-    #[SerializedName('bank_identifier')]
+    /**
+     * @SerializedName("bank_identifier")
+     */
     private ?string $bankIdentifier;
     private ?string $reference;
-    #[SerializedName('bank_name')]
+    /**
+     * @SerializedName("bank_name")
+     */
     private ?string $bankName;
-    #[SerializedName('bank_address')]
+    /**
+     * @SerializedName("bank_address")
+     */
     private ?string $bankAddress;
-    #[SerializedName('bank_country')]
+    /**
+     * @SerializedName("bank_country")
+     */
     private ?string $bankCountry;
-    #[SerializedName('intermediary_bank_name')]
+    /**
+     * @SerializedName("intermediary_bank_name")
+     */
     private ?string $intermediaryBankName;
-    #[SerializedName('intermediary_account_number')]
+    /**
+     * @SerializedName("intermediary_account_number")
+     */
     private ?string $intermediaryAccountNumber;
-    #[SerializedName('intermediary_bic')]
+    /**
+     * @SerializedName("intermediary_bic")
+     */
     private ?string $intermediaryBic;
 
     public function getNetwork(): ?string

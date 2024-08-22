@@ -7,6 +7,7 @@ use UniPayment\SDK\Model\CreateInvoiceRequest;
 use UniPayment\SDK\Model\InvoiceErrorStatus;
 use UniPayment\SDK\Model\InvoiceStatus;
 use UniPayment\SDK\Model\QueryInvoicesRequest;
+use UniPayment\SDK\Utils\JsonSerializer;
 
 class BillingAPITest extends BaseTest
 {
@@ -19,11 +20,17 @@ class BillingAPITest extends BaseTest
         $createInvoiceRequest = new CreateInvoiceRequest();
         $createInvoiceRequest->setAppId($this->configuration->getAppId());
         $createInvoiceRequest->setOrderId(Uuid::uuid4());
-        $createInvoiceRequest->setPriceAmount(1.0);
+        $createInvoiceRequest->setPriceAmount(20.0);
         $createInvoiceRequest->setPriceCurrency('USD');
         $createInvoiceRequest->setLang("en");
         $createInvoiceRequest->setExtArgs("Merchant Pass Through Data");
         $createInvoiceRequest->setNotifyURL('https://en7exsmaa68jo.x.pipedream.net');
+        $createInvoiceRequest->setHostToHostMode(true);
+        $createInvoiceRequest->setPaymentMethodType("CRYPTO");
+        $createInvoiceRequest->setPayCurrency("BNB");
+        $createInvoiceRequest->setPayNetwork("NETWORK_BSC");
+
+        print JsonSerializer::toJson($createInvoiceRequest);
 
         $createInvoiceResponse = $this->billingAPI->createInvoice($createInvoiceRequest);
         $this->assertNotNull($createInvoiceResponse);

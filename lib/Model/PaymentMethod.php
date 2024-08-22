@@ -13,10 +13,14 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 class PaymentMethod
 {
     private ?string $id = null;
-    #[SerializedName('beneficiary_id')]
+    /**
+     * @SerializedName("beneficiary_id")
+     */
     private ?string $beneficiaryId = null;
     private ?string $title = null;
-    #[SerializedName('transfer_method')]
+    /**
+     * @SerializedName("transfer_method")
+     */
     private string $transferMethod;
     private PaymentMethodDetail $detail;
 

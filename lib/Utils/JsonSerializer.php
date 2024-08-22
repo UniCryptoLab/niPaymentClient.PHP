@@ -2,13 +2,14 @@
 
 namespace UniPayment\SDK\Utils;
 
+use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AttributeLoader;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
@@ -26,7 +27,7 @@ class JsonSerializer
             new ReflectionExtractor(),
         ]);
         return new Serializer(
-            normalizers: [
+            [
                 new ObjectNormalizer(null, null, null, $extractor),
                 new DateTimeNormalizer([
                     DateTimeNormalizer::FORMAT_KEY => "yyyy-MM-dd'T'HH:mm:ss",
@@ -34,16 +35,16 @@ class JsonSerializer
                 new GetSetMethodNormalizer(),
                 new ArrayDenormalizer(),
             ],
-            encoders: ['json' => new JsonEncoder()]
+            ['json' => new JsonEncoder()]
         );
     }
 
     private static function getDeserializer(): Serializer
     {
-        $classMetadataFactory = new ClassMetadataFactory(new AttributeLoader());
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $metadataAwareNameConverter = new MetadataAwareNameConverter($classMetadataFactory);
         return new Serializer(
-            normalizers: [
+            [
                 new ObjectNormalizer($classMetadataFactory, $metadataAwareNameConverter, null, new ReflectionExtractor()),
                 new DateTimeNormalizer([
                     DateTimeNormalizer::FORMAT_KEY => "yyyy-MM-dd'T'HH:mm:ss",
@@ -51,7 +52,7 @@ class JsonSerializer
                 new GetSetMethodNormalizer(),
                 new ArrayDenormalizer(),
             ],
-            encoders: ['json' => new JsonEncoder()]
+            ['json' => new JsonEncoder()]
         );
     }
 

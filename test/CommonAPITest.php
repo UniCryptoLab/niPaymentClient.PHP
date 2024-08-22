@@ -23,7 +23,7 @@ class CommonAPITest extends BaseTest
      */
     public function testPostPing()
     {
-        $pingResponse = $this->commonAPI->ping(usePost: true);
+        $pingResponse = $this->commonAPI->ping(true);
         $this->assertNotNull($pingResponse);
         $this->assertEquals('OK', $pingResponse->getCode());
         $this->assertEquals('pong', $pingResponse->getMsg());

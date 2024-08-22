@@ -14,11 +14,15 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 class DepositBankAccount
 {
     private ?string $network;
-    #[SerializedName('account_number')]
+    /**
+     * @SerializedName("account_number")
+     */
     private ?string $accountNumber;
     private ?string $iban;
     private ?string $bic;
-    #[SerializedName('routing_number')]
+    /**
+     * @SerializedName("routing_number")
+     */
     private ?string $routingNumber;
     private ?Beneficiary $beneficiary;
     private ?BankInfo $bankInfo;

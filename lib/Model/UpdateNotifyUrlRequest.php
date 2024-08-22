@@ -12,7 +12,9 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class UpdateNotifyUrlRequest
 {
-    #[SerializedName('notify_url')]
+    /**
+     * @SerializedName("notify_url")
+     */
     private string $updateNotifyUrl;
 
     public function getUpdateNotifyUrl(): string

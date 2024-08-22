@@ -68,8 +68,8 @@ class ApiClient
                 $statusCode = $response->getStatusCode();
                 $body = $response->getBody()->getContents();
                 $json = json_decode($body, true);
-                if ($json['error']) {
-                    throw new UnipaymentSDKException($json['error'], $statusCode);
+                if ($json['msg']) {
+                    throw new UnipaymentSDKException($json['msg'], $statusCode);
                 }
             }
             throw new UnipaymentSDKException($e->getMessage(), $statusCode);
@@ -95,7 +95,7 @@ class ApiClient
     /**
      * @throws UnipaymentSDKException
      */
-    public function put($endpoint, $headers = null, $body = null,): array
+    public function put($endpoint, $headers = null, $body = null): array
     {
         return $this->request('PUT', $endpoint, $headers, $body);
     }
@@ -103,7 +103,7 @@ class ApiClient
     /**
      * @throws UnipaymentSDKException
      */
-    public function delete($endpoint, $headers = null, $body = null,): array
+    public function delete($endpoint, $headers = null, $body = null): array
     {
         return $this->request('DELETE', $endpoint, $headers, $body);
     }

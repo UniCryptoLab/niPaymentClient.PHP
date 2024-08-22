@@ -14,19 +14,29 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 class Payment
 {
     private string $id;
-    #[SerializedName('customer_id')]
+    /**
+     * @SerializedName("customer_id")
+     */
     private string $customerId;
-    #[SerializedName('transfer_method')]
+    /**
+     * @SerializedName("transfer_method")
+     */
     private string $transferMethod;
     private string $network;
-    #[SerializedName('asset_type')]
+    /**
+     * @SerializedName("asset_type")
+     */
     private string $assetType;
-    #[SerializedName('from_account_id')]
+    /**
+     * @SerializedName("from_account_id")
+     */
     private ?string $fromAccountId;
     private PaymentDestination $destination;
     private float $amount;
     private float $fee;
-    #[SerializedName('total_amount')]
+    /**
+     * @SerializedName("total_amount")
+     */
     private float $totalAmount;
     private ?string $reference = null;
     private ?string $reason = null;
@@ -35,12 +45,16 @@ class Payment
     /**
      * @var DateTime
      */
-    #[SerializedName('create_time')]
+    /**
+     * @SerializedName("create_time")
+     */
     private mixed $createTime;
     /**
      * @var DateTime
      */
-    #[SerializedName('update_time')]
+    /**
+     * @SerializedName("update_time")
+     */
     private mixed $updateTime;
 
     public function getId(): string

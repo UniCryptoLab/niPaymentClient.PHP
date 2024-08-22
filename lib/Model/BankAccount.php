@@ -13,11 +13,17 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  */
 class BankAccount
 {
-    #[SerializedName('bank_name')]
+    /**
+     * @SerializedName("bank_name")
+     */
     private string $bankName;
-    #[SerializedName('bank_account')]
+    /**
+     * @SerializedName("bank_account")
+     */
     private string $bankAccount;
-    #[SerializedName('bank_bic')]
+    /**
+     * @SerializedName("bank_bic")
+     */
     private string $bankBic;
 
     public function getBankName(): string

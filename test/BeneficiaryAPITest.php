@@ -22,8 +22,8 @@ class BeneficiaryAPITest extends BaseTest
     public function testCreateBeneficiary()
     {
         $beneficiary = new Beneficiary();
-        $beneficiary->setName("Beneficiary 1");
-        $beneficiary->setEmail("beneficiary1@gmail.com");
+        $beneficiary->setName("Beneficiary 2");
+        $beneficiary->setEmail("beneficiary2@gmail.com");
         $beneficiary->setType(BeneficiaryType::INDIVIDUAL);
         $beneficiary->setRelationship(Relationship::CUSTOMER);
 
@@ -144,7 +144,7 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
-            return $beneficiary->getEmail() === 'beneficiary1@gmail.com';
+            return $beneficiary->getEmail() === 'beneficiary2@gmail.com';
         });
 
         /** @var Beneficiary $beneficiary */
