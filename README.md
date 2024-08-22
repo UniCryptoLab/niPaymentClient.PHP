@@ -31,7 +31,7 @@ Add unipayment/client into require section of composer.json
 ```json
 {
   "require": {
-    "unipayment/sdk": "2.*"
+    "unipayment/client": "2.*"
   }
 }
 
