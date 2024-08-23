@@ -4,7 +4,6 @@ namespace UniPayment\SDK;
 
 use UniPayment\SDK\Model\UpdateNotifyUrlRequest;
 use UniPayment\SDK\Model\UpdateSecretKeyRequest;
-use UniPayment\SDK\Utils\JsonSerializer;
 
 class WebhookAPITest extends BaseTest
 {

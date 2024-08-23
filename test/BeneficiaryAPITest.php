@@ -24,7 +24,7 @@ class BeneficiaryAPITest extends BaseTest
     {
         parent::setUp();
         $faker = Faker\Factory::create();
-        $this->email = $faker->email;
+        $this->email = 'unipayment@test.com';
         $this->generatedName = $faker->name();
     }
 
@@ -66,6 +66,7 @@ class BeneficiaryAPITest extends BaseTest
     {
         $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
         $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
+        $this->logResponse($queryBeneficiaryResponse);
         $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
             return $beneficiary->getEmail() === $this->email;
         });
@@ -100,24 +101,6 @@ class BeneficiaryAPITest extends BaseTest
         $queryBeneficiaryByIdResponse = $this->beneficiaryAPI->updateBeneficiary($beneficiaryId, $beneficiary);
         $this->assertNotNull($queryBeneficiaryByIdResponse);
         $this->assertEquals('OK', $queryBeneficiaryByIdResponse->getCode());
-    }
-
-    /**
-     * Test case for updateBeneficiary
-     * @throws UnipaymentSDKException
-     */
-    public function testDeleteBeneficiary()
-    {
-        $beneficiary = new Beneficiary();
-        $beneficiary->setName("Beneficiary 2");
-        $beneficiary->setEmail($this->email);
-        $beneficiary->setType(BeneficiaryType::INDIVIDUAL);
-        $beneficiary->setRelationship(Relationship::CUSTOMER);
-
-        $createBeneficiaryResponse = $this->beneficiaryAPI->createBeneficiary($beneficiary);
-        $deleteBeneficiaryResponse = $this->beneficiaryAPI->deleteBeneficiary($createBeneficiaryResponse->getData()->getId());
-        $this->assertNotNull($deleteBeneficiaryResponse);
-        $this->assertEquals('OK', $deleteBeneficiaryResponse->getCode());
     }
 
     /**
@@ -282,6 +265,27 @@ class BeneficiaryAPITest extends BaseTest
         $deletePaymentMethodResponse = $this->beneficiaryAPI->deletePaymentMethod($beneficiaryId, $createPaymentMethodResponse->getData()->getId());
         $this->assertNotNull($deletePaymentMethodResponse);
         $this->assertEquals('OK', $deletePaymentMethodResponse->getCode());
+    }
+
+    /**
+     * Test case for deleteBeneficiary
+     * @throws UnipaymentSDKException
+     */
+    public function testDeleteBeneficiary()
+    {
+        $queryBeneficiaryRequest = new QueryBeneficiaryRequest();
+        $queryBeneficiaryResponse = $this->beneficiaryAPI->queryBeneficiaries($queryBeneficiaryRequest);
+        $beneficiaries = array_filter($queryBeneficiaryResponse->getData()->getModels(), function (Beneficiary $beneficiary) {
+            return $beneficiary->getEmail() === $this->email;
+        });
+
+        /** @var Beneficiary $beneficiary */
+        $beneficiary = reset($beneficiaries);
+        $beneficiaryId = $beneficiary->getId();
+
+        $deleteBeneficiaryResponse = $this->beneficiaryAPI->deleteBeneficiary($beneficiaryId);
+        $this->assertNotNull($deleteBeneficiaryResponse);
+        $this->assertEquals('OK', $deleteBeneficiaryResponse->getCode());
     }
 
     private function createCryptoPaymentMethod(): PaymentMethod

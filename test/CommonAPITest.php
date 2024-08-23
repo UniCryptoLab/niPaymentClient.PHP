@@ -114,10 +114,11 @@ class CommonAPITest extends BaseTest
           "notify_id": "fd58cedd-67c6-4053-ae65-2f6fb09a7d2c",
           "notify_time": "0001-01-01T00:00:00"
         }';
-        $checkIpn = $this->commonAPI->checkIpn($body);
-        $this->assertNotNull($checkIpn);
-        $this->assertEquals('OK', $checkIpn->getCode());
-        $this->assertEquals('IPN is verified.', $checkIpn->getMsg());
+        $checkIpnResponse = $this->commonAPI->checkIpn($body);
+        $this->assertNotNull($checkIpnResponse);
+        $this->logResponse($checkIpnResponse);
+        $this->assertEquals('OK', $checkIpnResponse->getCode());
+        $this->assertEquals('IPN is verified.', $checkIpnResponse->getMsg());
     }
 
 }

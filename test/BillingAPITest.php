@@ -7,7 +7,6 @@ use UniPayment\SDK\Model\CreateInvoiceRequest;
 use UniPayment\SDK\Model\InvoiceErrorStatus;
 use UniPayment\SDK\Model\InvoiceStatus;
 use UniPayment\SDK\Model\QueryInvoicesRequest;
-use UniPayment\SDK\Utils\JsonSerializer;
 
 class BillingAPITest extends BaseTest
 {
@@ -29,11 +28,11 @@ class BillingAPITest extends BaseTest
         $createInvoiceRequest->setPaymentMethodType("CRYPTO");
         $createInvoiceRequest->setPayCurrency("BNB");
         $createInvoiceRequest->setPayNetwork("NETWORK_BSC");
-
-        print JsonSerializer::toJson($createInvoiceRequest);
+        $this->logRequest($createInvoiceRequest);
 
         $createInvoiceResponse = $this->billingAPI->createInvoice($createInvoiceRequest);
         $this->assertNotNull($createInvoiceResponse);
+        $this->logResponse($createInvoiceResponse);
         $this->logResponse($createInvoiceResponse);
         $this->assertEquals('OK', $createInvoiceResponse->getCode());
     }
