@@ -10,7 +10,7 @@ flow/e-commerce integration rather than on the specific details of client-server
 
 ## Getting Started
 
-[Integrate Tutorial](https://help.unipayment.io/en/articles/7851188-integrate-with-payment-gateway)
+[Integrate Tutorial](https://bit.ly/up-help-integration)
 
 Before using the UniPayment API, sign up for your [API key](https://console.unipayment.io/).
 
@@ -44,6 +44,7 @@ $configuration = new \UniPayment\SDK\Configuration();
 $configuration->setClientId('your client id');
 $configuration->setClientSecret('your secret key');
 $configuration->setAppId('your app id');
+$configuration->setIsSandbox(false);
 ```
 
 Sandbox is used in the same way with is_sandbox as true.
@@ -73,10 +74,6 @@ endpoint. This request must include your client_id, client_secret, and the grant
 > Reference：https://unipayment.readme.io/reference/create_invoice
 
 ```php
-$client_id='your client id'
-$client_secret='your client secret'
-$app_id = 'your payment app id'
-
 $createInvoiceRequest = new \UniPayment\SDK\Model\CreateInvoiceRequest();
 $createInvoiceRequest->setAppId($configuration->getAppId());
 $createInvoiceRequest->setOrderId(Uuid::uuid4());
@@ -124,57 +121,10 @@ try{
 
 ```
 
-## Handle IPN
-
-> Reference：https://unipayment.readme.io/reference/ipn-check
-
-> Invoice Status: https://unipayment.readme.io/reference/invoice-status
-
-IPNs (Instant Payment Notifications) are sent to the notify_url when order status is changed to paid, confirmed and
-complete.
-
-```php
-
-$notify='{"ipn_type":"invoice","event":"invoice_created","app_id":"cee1b9e2-d90c-4b63-9824-d621edb38012","invoice_id":"12wQquUmeCPUx3qmp3aHnd","order_id":"ORDER_123456","price_amount":2.0,"price_currency":"USD","network":null,"address":null,"pay_currency":null,"pay_amount":0.0,"exchange_rate":0.0,"paid_amount":0.0,"confirmed_amount":0.0,"refunded_price_amount":0.0,"create_time":"2022-09-14T04:57:54.5599307Z","expiration_time":"2022-09-14T05:02:54.559933Z","status":"New","error_status":"None","ext_args":"Merchant Pass Through Data","transactions":null,"notify_id":"fd58cedd-67c6-4053-ae65-2f6fb09a7d2c","notify_time":"0001-01-01T00:00:00"}';
-
-$commonAPI = new \UniPayment\SDK\CommonAPI($configuration);
-$response = $commonAPI->checkIpn($notify);
-
-```
-
-IPN notify
-
-``` json
-{
-  "ipn_type": "invoice",
-  "event": "invoice_expired",
-  "app_id": "cee1b9e2-d90c-4b63-9824-d621edb38012",
-  "invoice_id": "3Q7fyLnB2YNhUDW1fFNyEz",
-  "order_id": "20",
-  "price_amount": 6.0,
-  "price_currency": "SGD",
-  "network": null,
-  "address": null,
-  "pay_currency": null,
-  "pay_amount": 0.0,
-  "exchange_rate": 0.0,
-  "paid_amount": 0.0,
-  "confirmed_amount": 0.0,
-  "refunded_price_amount": 0.0,
-  "create_time": "2022-09-12T03:36:03",
-  "expiration_time": "2022-09-12T03:41:03",
-  "status": "Expired",
-  "error_status": "None",
-  "ext_args": null,
-  "transactions": null,
-  "notify_id": "8ccd2b61-226b-48e5-99b8-acb1f350313e",
-  "notify_time": "2022-09-12T03:56:10.5852752Z"
-}
-```
+## Webhook Notification
+[Webhook Tutorial](https://bit.ly/up-help-webhook)
 
 ## Webhook Signature Verification
-
-See https://unipayment.readme.io/reference/webhook
 
 Use the below code to verify of the 'hmac_signature' which can extract from the request header
 
