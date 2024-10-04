@@ -10,7 +10,7 @@ flow/e-commerce integration rather than on the specific details of client-server
 
 ## Getting Started
 
-[Integrate Tutorial](https://bit.ly/up-help-integration)
+[Integration Tutorial](https://bit.ly/up-help-integration)
 
 Before using the UniPayment API, sign up for your [API key](https://console.unipayment.io/).
 
@@ -58,16 +58,6 @@ $configuration->setIsSandbox(true);
 $configuration->setDebug(true);        
 ```
 
-## Authentication
-
-> Reference：https://unipayment.readme.io/reference/authentication
-
-### Obtaining An Access Token
-
-To authenticate your application, you need to obtain an access token by making a request to our OAuth 2.0 token
-endpoint. This request must include your client_id, client_secret, and the grant_type.
-
-> How to obtain an access token: https://unipayment.readme.io/reference/access-token
 
 ## Create an invoice
 
