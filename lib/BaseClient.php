@@ -74,7 +74,6 @@ abstract class BaseClient
 
             $exp = (int)$dataMap['exp'];
             $expInMillis = $exp * 1000;
-            error_log("Access Token expires on: " . date('Y-m-d H:i:s', $expInMillis / 1000));
 
             $currentMills = round(microtime(true) * 1000);
             return $expInMillis > $currentMills;

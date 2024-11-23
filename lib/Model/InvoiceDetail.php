@@ -17,6 +17,11 @@ class InvoiceDetail extends Invoice
     private array $transactions;
 
     /**
+     * @Type("array<UniPayment\SDK\Model\InvoiceRefund>")
+     */
+    private array $refunds;
+
+    /**
      * @return Transaction[]
      */
     public function getTransactions(): array
@@ -27,5 +32,21 @@ class InvoiceDetail extends Invoice
     public function setTransactions(array $transactions): void
     {
         $this->transactions = $transactions;
+    }
+
+    /**
+     * @return InvoiceRefund[]
+     */
+    public function getRefunds(): array
+    {
+        return $this->refunds;
+    }
+
+    /**
+     * @param array $refunds
+     */
+    public function setRefunds(array $refunds): void
+    {
+        $this->refunds = $refunds;
     }
 }

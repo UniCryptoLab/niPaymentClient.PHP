@@ -53,20 +53,6 @@ final class Configuration
     protected string $appId = '';
 
     /**
-     * Debug switch (default set to false)
-     *
-     * @var bool
-     */
-    protected bool $debug = false;
-
-    /**
-     * Debug file location (log to STDOUT by default)
-     *
-     * @var string
-     */
-    protected string $debugFile = 'php://output';
-
-    /**
      * Debug file location (log to STDOUT by default)
      *
      * @var string
@@ -225,58 +211,6 @@ final class Configuration
     }
 
     /**
-     * Gets the debug flag
-     *
-     * @return bool
-     */
-    public function getDebug(): bool
-    {
-        return $this->debug;
-    }
-
-    /**
-     * Sets the debug file
-     *
-     * @param string $debugFile Debug file
-     *
-     */
-    public function setDebugFile(string $debugFile): void
-    {
-        $this->debugFile = $debugFile;
-    }
-
-    /**
-     * Gets the debug file
-     *
-     * @return string
-     */
-    public function getDebugFile(): string
-    {
-        return $this->debugFile;
-    }
-
-    /**
-     * Sets the temp folder path
-     *
-     * @param string $tempFolderPath Temp folder path
-     *
-     */
-    public function setTempFolderPath(string $tempFolderPath): void
-    {
-        $this->tempFolderPath = $tempFolderPath;
-    }
-
-    /**
-     * Gets the temp folder path
-     *
-     * @return string Temp folder path
-     */
-    public function getTempFolderPath(): string
-    {
-        return $this->tempFolderPath;
-    }
-
-    /**
      * Gets the essential information for debugging
      *
      * @return string The report for debugging
@@ -287,7 +221,6 @@ final class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 1.0.0' . PHP_EOL;
-        $report .= '    Temp Folder Path: ' . $this->getTempFolderPath() . PHP_EOL;
         return $report;
     }
 

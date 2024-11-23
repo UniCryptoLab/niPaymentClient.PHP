@@ -2,66 +2,17 @@
 
 namespace UniPayment\SDK\Model;
 
-
 use DateTime;
 
-/**
- * Query Invoice Request
- *
- * @category Class
- * @package  UniPayment\SDK\Model
- */
-class QueryInvoicesRequest
+class QueryInvoiceRefundsRequest
 {
-    private ?string $appId = null;
-    private ?string $invoiceId = null;
-    private ?string $orderId = null;
-    private ?string $status = null;
     private int $pageNo = 1;
     private int $pageSize = 10;
     private bool $isAsc = true;
+    private ?string $invoiceId = null;
+    private ?string $status = null;
     private ?DateTime $start = null;
     private ?DateTime $end = null;
-
-    public function getAppId(): string
-    {
-        return $this->appId;
-    }
-
-    public function setAppId(string $appId): void
-    {
-        $this->appId = $appId;
-    }
-
-    public function getInvoiceId(): string
-    {
-        return $this->invoiceId;
-    }
-
-    public function setInvoiceId(string $invoiceId): void
-    {
-        $this->invoiceId = $invoiceId;
-    }
-
-    public function getOrderId(): string
-    {
-        return $this->orderId;
-    }
-
-    public function setOrderId(string $orderId): void
-    {
-        $this->orderId = $orderId;
-    }
-
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): void
-    {
-        $this->status = $status;
-    }
 
     public function getPageNo(): int
     {
@@ -93,22 +44,42 @@ class QueryInvoicesRequest
         $this->isAsc = $isAsc;
     }
 
-    public function getStart(): DateTime
+    public function getInvoiceId(): ?string
+    {
+        return $this->invoiceId;
+    }
+
+    public function setInvoiceId(?string $invoiceId): void
+    {
+        $this->invoiceId = $invoiceId;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): void
+    {
+        $this->status = $status;
+    }
+
+    public function getStart(): ?DateTime
     {
         return $this->start;
     }
 
-    public function setStart(DateTime $start): void
+    public function setStart(?DateTime $start): void
     {
         $this->start = $start;
     }
 
-    public function getEnd(): DateTime
+    public function getEnd(): ?DateTime
     {
         return $this->end;
     }
 
-    public function setEnd(DateTime $end): void
+    public function setEnd(?DateTime $end): void
     {
         $this->end = $end;
     }
@@ -120,12 +91,9 @@ class QueryInvoicesRequest
         $startString = $this->start ? $this->start->getTimestamp() : null;
         $endString = $this->end ? $this->end->getTimestamp() : null;
 
-
         // Build the query array
         $queryArray = [
-            'app_id' => $this->appId,
             'invoice_id' => $this->invoiceId,
-            'order_id' => $this->orderId,
             'status' => $this->status,
             'page_no' => $this->pageNo,
             'page_size' => $this->pageSize,

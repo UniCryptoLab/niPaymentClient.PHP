@@ -4,9 +4,12 @@ namespace UniPayment\SDK;
 
 use Ramsey\Uuid\Uuid;
 use UniPayment\SDK\Model\BuyerInfo;
+use UniPayment\SDK\Model\CancelInvoiceRefundRequest;
 use UniPayment\SDK\Model\CreateInvoiceRequest;
 use UniPayment\SDK\Model\InvoiceErrorStatus;
+use UniPayment\SDK\Model\InvoiceRefundRequest;
 use UniPayment\SDK\Model\InvoiceStatus;
+use UniPayment\SDK\Model\QueryInvoiceRefundsRequest;
 use UniPayment\SDK\Model\QueryInvoicesRequest;
 
 class BillingAPITest extends BaseTest
@@ -17,14 +20,7 @@ class BillingAPITest extends BaseTest
      */
     public function testCreateInvoice()
     {
-        $createInvoiceRequest = new CreateInvoiceRequest();
-        $createInvoiceRequest->setAppId($this->configuration->getAppId());
-        $createInvoiceRequest->setOrderId(Uuid::uuid4());
-        $createInvoiceRequest->setPriceAmount(20.0);
-        $createInvoiceRequest->setPriceCurrency('USD');
-        $createInvoiceRequest->setLang("en");
-        $createInvoiceRequest->setExtArgs("Merchant Pass Through Data");
-        $createInvoiceRequest->setNotifyURL('https://en7exsmaa68jo.x.pipedream.net');
+        $createInvoiceRequest = $this->getCreateInvoiceRequest();
         $this->logRequest($createInvoiceRequest);
 
         $createInvoiceResponse = $this->billingAPI->createInvoice($createInvoiceRequest);
@@ -57,6 +53,8 @@ class BillingAPITest extends BaseTest
         $this->assertEquals('OK', $getInvoiceByIdResponse->getCode());
         $this->assertEquals(InvoiceErrorStatus::NONE, $getInvoiceByIdResponse->getData()->getErrorStatus());
         $this->assertEquals(InvoiceStatus::EXPIRED, $getInvoiceByIdResponse->getData()->getStatus());
+        $this->assertNotNull($getInvoiceByIdResponse->getData()->getRefunds());
+
     }
 
     /**
@@ -75,7 +73,7 @@ class BillingAPITest extends BaseTest
         $createInvoiceRequest->setNotifyURL('https://en7exsmaa68jo.x.pipedream.net');
         $createInvoiceRequest->setHostToHostMode(true);
         $createInvoiceRequest->setPaymentMethodType("CRYPTO");
-        $createInvoiceRequest->setPayCurrency("BNB");
+        $createInvoiceRequest->setPayCurrency("UTT");
         $createInvoiceRequest->setPayNetwork("NETWORK_BSC");
         $this->logRequest($createInvoiceRequest);
 
@@ -116,6 +114,83 @@ class BillingAPITest extends BaseTest
         $this->assertNotNull($createInvoiceResponse);
         $this->logResponse($createInvoiceResponse);
         $this->assertEquals('OK', $createInvoiceResponse->getCode());
+    }
+
+    /**
+     * Test case for createInvoiceRefund
+     * @throws UnipaymentSDKException
+     */
+    public function testCreateInvoiceRefund()
+    {
+        $createInvoiceRequest = $this->getCreateInvoiceRequest();
+        $this->logRequest($createInvoiceRequest);
+
+        $createInvoiceResponse = $this->billingAPI->createInvoice($createInvoiceRequest);
+        $this->assertEquals('OK', $createInvoiceResponse->getCode());
+
+        $invoiceRefundRequest = new InvoiceRefundRequest();
+        $invoiceRefundRequest->setFeePayer("MERCHANT");
+        $invoiceRefundRequest->setPriceCurrency("USD");
+        $invoiceRefundRequest->setRefundPriceAmount(20.0);
+        $invoiceRefundRequest->setReason("Refund");
+        $this->logRequest($invoiceRefundRequest);
+
+        $invoiceRefundResponse = $this->billingAPI->createInvoiceRefund($createInvoiceResponse->getData()->getInvoiceId(), $invoiceRefundRequest);
+        $this->assertNotNull($invoiceRefundResponse);
+        $this->logResponse($invoiceRefundResponse);
+        $this->assertEquals('OK', $invoiceRefundResponse->getCode());
+    }
+
+    /**
+     * Test case for createInvoiceRefund
+     * @throws UnipaymentSDKException
+     */
+    public function testCancelInvoiceRefund()
+    {
+        $createInvoiceRequest = $this->getCreateInvoiceRequest();
+        $this->logRequest($createInvoiceRequest);
+
+        $createInvoiceResponse = $this->billingAPI->createInvoice($createInvoiceRequest);
+        $this->assertEquals('OK', $createInvoiceResponse->getCode());
+
+        $invoiceRefundRequest = new InvoiceRefundRequest();
+        $invoiceRefundRequest->setFeePayer("MERCHANT");
+        $invoiceRefundRequest->setPriceCurrency("USD");
+        $invoiceRefundRequest->setRefundPriceAmount(20.0);
+        $invoiceRefundRequest->setReason("Refund");
+        $this->logRequest($invoiceRefundRequest);
+
+        $invoiceRefundResponse = $this->billingAPI->createInvoiceRefund($createInvoiceResponse->getData()->getInvoiceId(), $invoiceRefundRequest);
+        $this->assertEquals('OK', $invoiceRefundResponse->getCode());
+
+        $cancelInvoiceRefundRequest = new CancelInvoiceRefundRequest();
+        $cancelInvoiceRefundRequest->setNote("Cancel");
+        $cancelInvoiceRefundResponse = $this->billingAPI->cancelInvoiceRefund($invoiceRefundResponse->getData()->getRefundId(), $cancelInvoiceRefundRequest);
+        $this->assertEquals('OK', $cancelInvoiceRefundResponse->getCode());
+    }
+
+    /**
+     * Test case for queryInvoiceRefunds
+     * @throws UnipaymentSDKException
+     */
+    public function testQueryInvoiceRefunds()
+    {
+        $queryInvoiceRefundResponse = $this->billingAPI->queryInvoiceRefunds(new QueryInvoiceRefundsRequest());
+        $this->assertNotNull($queryInvoiceRefundResponse);
+        $this->logResponse($queryInvoiceRefundResponse);
+        $this->assertEquals('OK', $queryInvoiceRefundResponse->getCode());
+    }
+
+    public function getCreateInvoiceRequest(): CreateInvoiceRequest
+    {
+        $createInvoiceRequest = new CreateInvoiceRequest();
+        $createInvoiceRequest->setAppId($this->configuration->getAppId());
+        $createInvoiceRequest->setOrderId(Uuid::uuid4());
+        $createInvoiceRequest->setPriceAmount(20.0);
+        $createInvoiceRequest->setPriceCurrency('USD');
+        $createInvoiceRequest->setLang("en");
+        $createInvoiceRequest->setExtArgs("Merchant Pass Through Data");
+        return $createInvoiceRequest;
     }
 
 }

@@ -3,7 +3,6 @@
 namespace UniPayment\SDK;
 require_once(__DIR__ . '/../vendor/autoload.php');
 
-use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use UniPayment\SDK\Utils\JsonSerializer;
@@ -34,7 +33,6 @@ class BaseTest extends TestCase
         $this->configuration->setClientSecret($this->clientSecret);
         $this->configuration->setIsSandbox(true);
         $this->configuration->setAppId($this->appId);
-        $this->configuration->setDebug(true);
         $this->oauthTokenAPI = new OauthTokenAPI($this->configuration);
         $this->commonAPI = new CommonAPI($this->configuration);
         $this->billingAPI = new BillingAPI($this->configuration);
@@ -44,9 +42,6 @@ class BaseTest extends TestCase
         $this->beneficiaryAPI = new BeneficiaryAPI($this->configuration);
         $this->webhookAPI = new WebhookAPI($this->configuration);
         $this->logger = new Logger($this->toString());
-        if ($this->configuration->getDebug()) {
-            $this->logger->pushHandler(new StreamHandler($this->configuration->getDebugFile()));
-        }
     }
 
     public function logRequest($request): void
