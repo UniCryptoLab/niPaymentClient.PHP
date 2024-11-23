@@ -8,7 +8,7 @@ use GuzzleHttp\Exception\RequestException;
 
 class ApiClient
 {
-    private string $userAgent = 'unipayment_sdk_php/2.0.5';
+    private string $userAgent = 'unipayment_sdk_php/2.0.6';
     /**
      * @var Configuration
      */
