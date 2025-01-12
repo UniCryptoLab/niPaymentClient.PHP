@@ -69,7 +69,7 @@ class ApiClient
                 $statusCode = $response->getStatusCode();
                 $body = $response->getBody()->getContents();
                 $json = json_decode($body, true);
-                if ($json['msg']) {
+                if (isset($json['msg']) && $json['msg']) {
                     throw new UnipaymentSDKException($json['msg'], $statusCode);
                 }
             }
